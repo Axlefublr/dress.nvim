@@ -2,14 +2,18 @@
 
 > Like `dressing.nvim`, but only `vim.ui.input`, with some fixes
 
-![showcase](https://github.com/Axlefublr/dress.nvim/blob/main/img/showcase.mp4)
+![rename](./img/rename.png)
+
+![normal](./img/normal.png)
+
+![finished](./img/finished.png)
 
 This plugin exists because of two reasons:
 
 1. I don't need the other `dressing.nvim` features
 2. Even if I got `vim.ui.input` from there, it doesn't work how I want it to
 
-So, this plugin replaces `vim.ui.input` with a custom implementation, you saw how it looks like in the video showcase above.
+So, this plugin replaces `vim.ui.input` with a custom implementation, you saw how it looks like in the showcase above.
 
 Differently from `dressing.nvim`, you actually get access to normal mode! \
 Pressing <kbd>Escape</kbd> in insert mode puts you in normal mode,
@@ -18,8 +22,6 @@ pressing <kbd>Escape</kbd> in normal mode cancels the operation.
 In other words, to cancel your input from insert mode, you have to press <kbd>Escape</kbd> twice, kinda like in telescope.
 
 Once you press <kbd>Enter</kbd> (in either normal or insert mode), you accept the input.
-
-![semantics](https://github.com/Axlefublr/dress.nvim/blob/main/img/semantics.mp4)
 
 ## Install
 
@@ -57,21 +59,21 @@ require('dress').valid_input()
 
 ---@type DressOpts
 local plugin_opts = { -- these are all defaults. if you like them, you can keep `opts = {}`
-	win_opts = {
-		relative = 'cursor',
-		width = 30,
-		height = 1,
-		row = 1,
-		col = 1,
-		style = 'minimal',
-		border = 'double',
-	},
-	-- Default is not 0 because with 0, the title looks squished (by the borders).
-	-- Feel free to change it, though.
-	title_padding = 1,
-	-- Makes sense to set to `false` if you only want to use the plugin explicitly
-	-- in your own configuration via `require('dress').input()`,
-	-- and want to keep the default `vim.ui.input` everywhere else.
-	inject = true,
+    win_opts = {
+        relative = 'cursor',
+        width = 30,
+        height = 1,
+        row = 1,
+        col = 1,
+        style = 'minimal',
+        border = 'double',
+    },
+    -- Default is not 0 because with 0, the title looks squished (by the borders).
+    -- Feel free to change it, though.
+    title_padding = 1,
+    -- Makes sense to set to `false` if you only want to use the plugin explicitly
+    -- in your own configuration via `require('dress').input()`,
+    -- and want to keep the default `vim.ui.input` everywhere else.
+    inject = true,
 }
 ```
