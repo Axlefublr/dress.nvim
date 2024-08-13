@@ -2,7 +2,7 @@
 
 > Like `dressing.nvim`, but only `vim.ui.input`, with some fixes
 
-![showcase](img/showcase.mp4)
+[![showcase](https://raw.githubusercontent.com/Axlefublr/dress.nvim/main/img/showcase.mp4)](https://raw.githubusercontent.com/Axlefublr/dress.nvim/main/img/showcase.mp4)
 
 This plugin exists because of two reasons:
 
@@ -19,7 +19,7 @@ In other words, to cancel your input from insert mode, you have to press <kbd>Es
 
 Once you press <kbd>Enter</kbd> (in either normal or insert mode), you accept the input.
 
-![semantics](img/semantics.mp4)
+[![semantics](https://raw.githubusercontent.com/Axlefublr/dress.nvim/main/img/semantics.mp4)](https://raw.githubusercontent.com/Axlefublr/dress.nvim/main/img/semantics.mp4)
 
 ## Install
 
