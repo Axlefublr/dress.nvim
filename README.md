@@ -46,6 +46,13 @@ require('dress').input()
 require('dress').valid_input()
 ```
 
+Both `input` and `valid_input` can be used like `vim.ui.input`. There are differences:
+1. If `opts` is a string, it's interpreted as `{ prompt = 'your_string' }`
+2. `opts.highlight` is not supported
+3. `opts.completion` is not supported
+4. `valid_input` automatically adds the `if not input then return end` check into the closure. \
+In your own scripts, you will basically *always* want `valid_input`, unless you need to run some cleanup logic on `nil`
+
 ## Options
 
 ```lua

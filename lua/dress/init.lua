@@ -115,22 +115,31 @@ end
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ public ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ---See `:h vim.ui.input()`.
----@param opts { prompt: string?, default: string|string[]|nil }? TODO: `completion` and `highlight` are not supported. I have no usecase for them, so I can't bother; will happily accept a PR.
+---@param opts { prompt: string?, default: string|string[]|nil }|string|nil TODO: `completion` and `highlight` are not supported. I have no usecase for them, so I can't bother; will happily accept a PR.
+---If you pass `opts` as a string, it's assumed you mean `{ prompt = 'your_string' }`.
 ---@param on_confirm fun(input: string?) This function is going to be called once you save and close the buffer.
 ---It will be called even if you pressed escape (to follow the intent of the `vim.ui.input` api),
 ---so make sure to include `if not input then return end` checks, if needed.
 ---I wrote it this way, because some thingies that use `vim.ui.input` probably run some cleanup code
 ---on `nil`
 function m.input(opts, on_confirm)
-	local opts = opts or {}
+	local default = nil
+	local prompt = nil
+	if type(opts) == 'string' then
+		prompt = opts
+	else
+		local opts = opts or {}
+		default = opts.default
+		prompt = opts.prompt
+	end
 
 	local bufnr = make_unlisted_scratch_buffer()
 
-	if opts.default then
-		replace_buf_text(bufnr, opts.default)
+	if default then
+		replace_buf_text(bufnr, default)
 	end
 
-	local window = make_window(bufnr, opts.prompt)
+	local window = make_window(bufnr, prompt)
 
 	set_cursor_last_line(window)
 	vim.cmd('startinsert!')
@@ -144,9 +153,9 @@ end
 -- ║ with correct lsp documentation hints, without having to cross-reference `input` ║
 -- ╚═════════════════════════════════════════════════════════════════════════════════╝
 
---- Wrapper that automatically adds the check for `nil` in your `on_confirm` closure.
---- See `:h vim.ui.input()`.
----@param opts { prompt: string?, default: string|string[]|nil }? TODO: `completion` and `highlight` are not supported. I have no usecase for them, so I can't bother; will happily accept a PR.
+---See `:h vim.ui.input()`.
+---@param opts { prompt: string?, default: string|string[]|nil }|string|nil TODO: `completion` and `highlight` are not supported. I have no usecase for them, so I can't bother; will happily accept a PR.
+---If you pass `opts` as a string, it's assumed you mean `{ prompt = 'your_string' }`.
 ---@param on_confirm fun(input: string?) This function is going to be called once you save and close the buffer.
 ---It will be called even if you pressed escape (to follow the intent of the `vim.ui.input` api),
 ---so make sure to include `if not input then return end` checks, if needed.
